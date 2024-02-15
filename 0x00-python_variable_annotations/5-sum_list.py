@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """ Module returns the sum of floats in a list"""
+import typing
 
 
 def sum_list(input_list: List[float]) -> float:

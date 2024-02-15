@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """ Returns a tuple with the string k and the square of v """
+import typing
 
 
-def to_kv(k: str, v: Union[int, float]) -> Tuple[str, float]:
+def to_kv(k: str, v: typing.Union[int, float]) -> typing.Tuple[str, float]:
     """ """
-    return k, float(v ** 2)
+    return (k, (v ** 2))
