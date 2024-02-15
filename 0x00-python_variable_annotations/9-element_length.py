@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-""" 
-Module that annotate the below function’s parameters 
+"""
+Module that annotate the below function’s parameters
 and return values with the appropriate types
 """
 
