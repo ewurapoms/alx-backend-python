@@ -51,7 +51,7 @@ class TestGithubOrgClient(unittest.TestCase):
             result = client.public_repos()
             json_mock.assert_called_once_with("https://example.com/repos")
             mock_public_repos_url.assert_called_once_with()
-            self.assertEqual(result, expected_result)
+            self.assertEqual(result, outcome)
 
     @parameterized.expand([
         ({"license": {"key": "my_license"}}, "my_license", True),
