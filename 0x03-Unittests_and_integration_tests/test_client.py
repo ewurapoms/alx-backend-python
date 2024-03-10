@@ -19,6 +19,7 @@ class TestGithubOrgClient(unittest.TestCase):
         """ tests the org class"""
         json_mock.return_value = {"name": git_org}
         client = GithubOrgClient(git_org)
-        self.assertEqual(client.org["name"], git_org)
+        info = client.org
         json_mock.assert_called_once_with(GithubOrgClient.
                                           ORG_URL.format(org=git_org))
+        self.assertEqual(info["name"], git_org)
