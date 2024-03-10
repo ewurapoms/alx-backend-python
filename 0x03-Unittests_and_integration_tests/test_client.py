@@ -39,24 +39,21 @@ class TestGithubOrgClient(unittest.TestCase):
             )
 
     @patch("client.get_json")
-    def test_public_repos(self, json_mock) -> None:
-        """displays test function"""
-        with patch(
-            "client.GithubOrgClient._public_repos_url",
-            new_callable=PropertyMock
-        ) as mock_public_repos_url:
-            mock_public_repos_url.return_value = (
-                "https://api.github.com/orgs/google/repos"
-            )
-            github_org_client = GithubOrgClient("google")
-            self.assertEqual(github_org_client.public_repos(),
-                             ["repo1", "repo2"])
-            json_mock.assert_called_once()
-            mock_public_repos_url.assert_called_once()
+    def test_public_repos(self, json_mock):
+        """Testing"""
+        data = [{"name": "repo1"}, {"name": "repo2"}]
+        outcome = ["repo1", "repo2"]
+        json_mock.return_value = data
+        with patch("client.GithubOrgClient._public_repos_url",
+                   new_callable=PropertyMock) as mock_public_repos_url:
+            mock_public_repos_url.return_value = "https://example.com/repos"
+            client = GithubOrgClient("example")
+            result = client.public_repos()
+            json_mock.assert_called_once_with("https://example.com/repos")
+            mock_public_repos_url.assert_called_once_with()
+            self.assertEqual(result, expected_result)
 
-    @parameterized.expand(
-        [
-            ({"license": {"key": "my_license"}}, "my_license", True),
-            ({"license": {"key": "other_license"}}, "my_license", False),
-        ]
-    )
+    @parameterized.expand([
+        ({"license": {"key": "my_license"}}, "my_license", True),
+        ({"license": {"key": "other_license"}}, "my_license", False),
+    ])
